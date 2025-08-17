@@ -1,0 +1,67 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+<PropertyGroup>
+  <TargetFramework>net7.0-windows7.0</TargetFramework>
+  <Nullable>enable</Nullable>
+  <UseWPF>true</UseWPF>
+  <ImplicitUsings>enable</ImplicitUsings>
+  <OutputType>WinExe</OutputType>
+  <Platforms>x64</Platforms>
+</PropertyGroup>
+
+<ItemGroup>
+  <None Include="Service_STT\Model\vosk-model-small-en-us-0.15\**\*">
+    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+  </None>
+  <None Include="Service_STT\Model\vosk-model-small-it-0.22\**\*">
+	<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+  </None>
+</ItemGroup>
+
+  <ItemGroup>
+	<None Update="appsettings.json">
+	  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</None>
+	<None Update="Service_Camera\EmotionRecognition\Model\emotion-ferplus-8.onnx">
+	  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</None>
+	<None Update="Service_Camera\EmotionRecognition\Model\haarcascade_frontalface_default.xml">
+	  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</None>
+	<None Update="Service_LLM\llama-2-7b.Q5_K_M.gguf">
+	  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</None>
+	<None Update="Storage\JSON\Log\logs.json">
+	  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</None>
+	<None Update="Storage\JSON\Personalities\uk_chappy_chat.json">
+	  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</None>
+	<None Update="Storage\JSON\Personalities\uk_glados_chat.json">
+	  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</None>
+	<None Update="Storage\JSON\Personalities\uk_neutral_chat.json">
+	  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="LLamaSharp" Version="0.16.0" />
+    <PackageReference Include="LLamaSharp.Backend.Cpu" Version="0.16.0" />
+    <PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.22.0" />
+    <PackageReference Include="NAudio" Version="2.2.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="OpenCvSharp4.Windows" Version="4.11.0.20250507" />
+    <PackageReference Include="System.Speech" Version="8.0.0" />
+    <PackageReference Include="Vosk" Version="0.3.38" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Service_Camera\EmotionRecognition\Model\" />
+    <Folder Include="Service_Camera\GestureRecognition\Models\" />
+    <Folder Include="Service_TTS\Glados\PreBuiltSpeech\" />
+  </ItemGroup>
+
+ 
+
+</Project>
