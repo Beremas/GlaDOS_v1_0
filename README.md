@@ -1,163 +1,130 @@
-GlaDOS v1.0
-Overview
+# GlaDOS v1.0
 
-GlaDOS v1.0 is an advanced voice-driven personal assistant application that integrates multiple services to simulate an AI with voice, speech-to-text, emotional recognition, and LLM (Large Language Model) capabilities. The system allows interaction through voice commands, recognizes emotions from camera input, and responds with synthesized speech. The application offers dynamic features such as real-time speech streaming, system diagnostics, and personalized interactions based on user preferences.
 
-Features
 
-Voice Interaction:
+> **⚠️ Personal Project Notice:**  
+> This project is for personal use only. It **cannot be used for production or commercial purposes**.  
 
-Uses Text-to-Speech (TTS) services to respond in a natural-sounding voice, with customizable voice options (e.g., Glados, Microsoft).
+------------------------------------
 
-Speech-to-Text (STT) service allows the system to listen and interpret spoken commands.
+> **⚠️ Important Model Note:** 
+> GlaDOS requires the **LLama-2-7b.Q5_K_M.gguf** or any other LLM (.gguf) file to function.
+Download `llama-2-7b.Q5_K_M.gguf` (or any other LLMs .gguf) and place it into ~\GlaDOS_v1_0\Service_LLM
 
-Emotional Recognition:
+------------------------------------
 
-Integrates with a camera module to analyze the user's emotional state, allowing GlaDOS to adapt its responses accordingly.
+## Overview
+**GlaDOS v1.0** is an advanced voice-driven personal assistant application that integrates multiple services to simulate an AI with voice, speech-to-text, emotional recognition, and LLM (Large Language Model) capabilities. The system allows interaction through voice commands, recognizes emotions from camera input, and responds with synthesized speech.  
 
-Large Language Model (LLM):
+The application offers dynamic features such as real-time speech streaming, system diagnostics, and personalized interactions based on user preferences.
 
-Powered by LLamaService, GlaDOS interacts using a pre-configured personality, answering questions, processing commands, and maintaining conversation history.
+---
 
-System Diagnostics:
+## Features
 
-At startup, GlaDOS runs diagnostic checks to ensure all services (voice, ears, eyes, and personality) are properly initialized. Any issues are logged and reported.
+### Voice Interaction
+- Uses Text-to-Speech (TTS) services to respond in a natural-sounding voice, with customizable options (e.g., Glados, Microsoft).  
+- Speech-to-Text (STT) service allows the system to listen and interpret spoken commands.
 
-Streaming Responses:
+### Emotional Recognition
+- Integrates with a camera module to analyze the user's emotional state.  
+- Adapts responses dynamically based on detected emotions.
 
-Delivers responses in chunks, with real-time updates on the user interface. It ensures smooth communication with a visible overlay of ongoing responses.
+### Large Language Model (LLM)
+- Powered by **LLamaService**, GlaDOS interacts using a pre-configured personality.  
+- Answers questions, processes commands, and maintains conversation history.
 
-Personalized Interaction:
+### System Diagnostics
+- Performs checks at startup to ensure all services (voice, ears, eyes, personality) are properly initialized.  
+- Logs and reports any detected issues.
 
-GlaDOS is configured with personalized settings (e.g., TTS voice, personality type) to provide a customized experience.
+### Streaming Responses
+- Delivers responses in chunks with real-time updates on the UI.  
+- Provides smooth communication with a visible overlay of ongoing responses.
 
-Workflow
+### Personalized Interaction
+- Configured with personalized settings such as TTS voice and personality type.  
 
-The system goes through several phases during startup:
+---
 
-Initialization:
+## Workflow
 
-Loads application settings.
+### 1. Initialization
+- Loads application settings.  
+- Initializes TTS, STT, and camera/emotion recognition modules.
 
-Initializes the TTS and STT services, as well as the camera and emotion recognition modules.
+### 2. Personality Injection
+- Loads the chosen personality model (e.g., Glados, Microsoft).  
 
-Personality Injection:
+### 3. System Diagnostics
+- Ensures all services are initialized correctly.  
+- Logs any issues for troubleshooting.
 
-Loads the desired personality model (e.g., Glados, Microsoft) for the LLM to ensure the responses are consistent with the character.
+### 4. Finalizing
+- All systems are ready, and GlaDOS starts listening for commands.  
 
-System Diagnostics:
+---
 
-Checks if all services are initialized correctly and logs any issues.
+## Key Classes and Methods
 
-Finalizing:
+- **MainWindow** – Main WPF window where all interactions occur.  
+- **Service_TTS** – Handles Text-to-Speech functionality.  
+- **SpeechToTextService** – Converts spoken input into text.  
+- **LLamaService** – Interacts with the LLM for responses.  
+- **CameraWatcher** – Detects emotions from the camera.  
+- **ChatHistoryService** – Tracks conversation history.  
+- **JsonLogger** – Logs messages and errors in JSON format.  
+- **EmotionHandler** – Processes detected emotions to trigger responses.  
 
-All systems are set, and GlaDOS starts listening for commands and interacting with the user.
+---
 
-Key Classes and Methods
+## How It Works
 
-MainWindow: The main WPF window where all interactions take place.
+### System Boot-Up
+- **MainWindow** manages the boot process.  
+- Initialization loads settings, TTS, STT, and the camera module.  
 
-Service_TTS: Handles Text-to-Speech functionality with Microsoft and Glados voices.
+### Phase Execution
+- Startup phases are narrated with progress bars:  
+  1. Initiating System  
+  2. Loading Voice, Ears, and Eyes Modules  
+  3. Injecting Personality  
+  4. Running System Diagnostics  
+  5. Finalizing Startup  
 
-SpeechToTextService: Converts speech input into text that GlaDOS can process.
+### Speech Interaction
+- Wake Word Detection: Listens for "system" or "sistema".  
+- Processes Commands: Responds to spoken input after wake word detection.  
+- Emotion Responses: Customizes replies based on camera-detected emotions.  
 
-LLamaService: A service for interacting with the LLM model to generate answers based on user queries.
+### Real-Time Message Streaming
+- Uses `DisplayStream` to show responses incrementally in the UI.  
 
-CameraWatcher: Manages camera input to recognize and analyze emotions based on facial expressions.
+### UI Updates
+- Displays **uptime**, **active personality**, and **selected TTS voice**.  
 
-ChatHistoryService: Tracks and stores the conversation history to improve the context of interactions.
+---
 
-JsonLogger: Logs messages and errors to a JSON file for diagnostics and troubleshooting.
+## Key Considerations
 
-EmotionHandler: Processes emotions detected from the camera and triggers relevant responses.
+- **Thread Safety:** UI updates, speech synthesis, and recognition ensure thread-safe access via `Dispatcher.Invoke`.  
+- **Error Handling:** All operations are wrapped in try-catch blocks for graceful shutdown on failures.  
+- **Real-Time Speech:** Streaming responses improve user experience by showing progress as answers are generated.  
 
-How It Works
-1. System Boot-Up
+---
 
-The MainWindow class is responsible for managing the entire boot process. Upon loading:
+## Requirements
 
-The system begins with an initialization phase, where settings are loaded from the AppSettings.
+- **.NET Framework:** WPF with .NET 5 or higher.  
+- **Libraries:**  
+  - `Newtonsoft.Json` for JSON parsing and logging  
+  - `OpenCVSharp` for camera and emotion recognition  
+  - `LLamaService` for LLM interactions  
 
-The voice (TTS) module is loaded based on user preferences (e.g., Glados or Microsoft voice).
+---
 
-If enabled, the system starts the Speech-to-Text (STT) service and prepares the camera module for emotion recognition.
+## Setup
 
-2. Phase Execution
-
-Each phase in the startup is narrated, and progress is displayed with a progress bar. These phases include:
-
-Initiating System: Loading the configuration and settings.
-
-Loading Voice, Ears, and Eyes Modules: Initializing TTS, STT, and camera services.
-
-Injecting Personality: Loading the chosen LLM personality (e.g., Glados).
-
-Running System Diagnostics: Ensuring all services are properly initialized.
-
-Finalizing Startup: Preparing the system for interaction and enabling live speech processing.
-
-3. Speech Interaction
-
-Once the system is ready, the user can interact through voice commands:
-
-Wake Word Detection: GlaDOS listens for specific wake words (e.g., "system" or "sistema") to activate.
-
-Processing Commands: After the wake word is detected, GlaDOS processes the following speech input and responds accordingly, either by asking questions or providing information.
-
-Emotion Responses: If the system detects emotions (via camera), it customizes its responses, such as saying, "I feel happy today."
-
-4. Real-Time Message Streaming
-
-GlaDOS uses a DisplayStream method to show real-time responses to the user. As the model generates responses in chunks, the UI is updated incrementally, and the system ensures smooth interaction by adjusting the delay based on message length.
-
-5. UI Updates
-
-The UI updates in real-time to show system status:
-
-Uptime: Displays the time since the system was started.
-
-Personality: Shows the current active personality model.
-
-Voice Synthesizer: Displays the selected TTS voice model.
-
-Key Considerations
-
-Thread Safety: The UI updates, speech synthesis, and speech recognition all ensure thread-safe access to the UI elements using the Dispatcher.Invoke method.
-
-Error Handling: All operations are wrapped in try-catch blocks to handle exceptions and ensure a graceful shutdown if any critical service fails.
-
-Real-Time Speech: The system allows for streaming responses, which improves the user experience by showing progress as the system generates a full answer.
-
-Requirements
-
-.NET Framework: This application is built using WPF (Windows Presentation Foundation) with .NET 5 or higher.
-
-Libraries:
-
-Newtonsoft.Json for JSON parsing and logging.
-
-OpenCVSharp for camera and emotion recognition.
-
-LLamaService for Large Language Model (LLM) interactions.
-
-Setup
-
-Clone the Repository: Clone this repository to your local machine.
-
-Install Dependencies: Use NuGet to restore all necessary packages.
-
-Configure Settings: Adjust the AppSettings file to configure the TTS, STT, and LLM models.
-
-Run the Application: Build and run the project using Visual Studio or your preferred .NET IDE.
-
-Troubleshooting
-
-Diagnostic Logs: If the system fails at any phase, check the JsonLogger logs for detailed error messages.
-
-Camera Module: Ensure that the camera is correctly connected and accessible for emotion recognition.
-
-Speech Issues: If the TTS or STT services are not working, verify the configuration settings in AppSettings.
-
-License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
+1. **Clone the Repository:**  
+   ```bash
+   git clone https://github.com/<your-username>/<your-repo>.git
