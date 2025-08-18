@@ -1,6 +1,7 @@
 # GlaDOS v1.0
 
 
+<img width="2548" height="1189" alt="Screenshot (171)" src="https://github.com/user-attachments/assets/51b93de3-5485-49f1-b8b0-7b6a38b5e29e" />
 
 > **⚠️ Personal Project Notice:**  
 > This project is for personal use only. It **cannot be used for production or commercial purposes**.  
