@@ -14,6 +14,10 @@ Download `llama-2-7b.Q5_K_M.gguf` (or any other LLMs .gguf) and place it into ~\
 
 ------------------------------------
 
+> **⚠️ This is a work in progress project.**  
+
+------------------------------------
+
 ## Overview
 **GlaDOS v1.0** is an advanced voice-driven personal assistant application that integrates multiple services to simulate an AI with voice, speech-to-text, emotional recognition, and LLM (Large Language Model) capabilities. The system allows interaction through voice commands, recognizes emotions from camera input, and responds with synthesized speech.  
 
